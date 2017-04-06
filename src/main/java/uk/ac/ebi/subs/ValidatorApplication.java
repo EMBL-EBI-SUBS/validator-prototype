@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Created by flaviapenim on 05/04/2017.
  */
 @SpringBootApplication
-public class ValidatorApp {
+public class ValidatorApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ValidatorApp.class, args);
+        SpringApplication.run(ValidatorApplication.class, args);
     }
 }
