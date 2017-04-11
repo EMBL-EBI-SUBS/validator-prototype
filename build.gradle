@@ -11,9 +11,10 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp'
+    compile group: 'uk.ac.ebi.subs', name: 'subs-data-model', version: '1.0.0-SNAPSHOT'
 }
