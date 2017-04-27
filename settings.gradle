@@ -1,2 +1,3 @@
 rootProject.name = 'validator-prototype'
 
+include 'validator-messaging'

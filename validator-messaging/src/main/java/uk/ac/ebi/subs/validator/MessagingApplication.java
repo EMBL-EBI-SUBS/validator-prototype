@@ -1,15 +1,11 @@
-package uk.ac.ebi.subs;
+package uk.ac.ebi.subs.validator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * Created by flaviapenim on 05/04/2017.
- */
 @SpringBootApplication
-public class ValidatorApplication {
-
+public class MessagingApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ValidatorApplication.class, args);
+        SpringApplication.run(MessagingApplication.class, args);
     }
 }
