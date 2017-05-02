@@ -9,6 +9,8 @@ repositories {
 }
 
 dependencies {
+    compile group: 'uk.ac.ebi.subs', name: 'subs-data-model', version: '1.0.0-SNAPSHOT'
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
