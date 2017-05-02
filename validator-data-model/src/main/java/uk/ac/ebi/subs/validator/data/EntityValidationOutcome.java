@@ -1,9 +1,11 @@
 package uk.ac.ebi.subs.validator.data;
 
+import lombok.ToString;
 import uk.ac.ebi.subs.data.component.Archive;
 
 import java.util.UUID;
 
+@ToString(callSuper = true)
 public class EntityValidationOutcome extends AbstractValidationOutcome implements Identifiable {
 
     private String version;
@@ -36,13 +38,4 @@ public class EntityValidationOutcome extends AbstractValidationOutcome implement
         this.uuid = uuid;
     }
 
-
-    @Override
-    public String toString() {
-        return "EntityValidationOutcome{" +
-                "version='" + version + '\'' +
-                ", uuid=" + uuid +
-                ", archive=" + archive +
-                "} " + super.toString();
-    }
 }

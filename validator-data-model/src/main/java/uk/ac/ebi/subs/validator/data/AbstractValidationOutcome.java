@@ -1,5 +1,8 @@
 package uk.ac.ebi.subs.validator.data;
 
+import lombok.ToString;
+
+@ToString
 public abstract class AbstractValidationOutcome {
 
     private String message;
@@ -22,11 +25,4 @@ public abstract class AbstractValidationOutcome {
         this.validationOutcome = validationOutcome;
     }
 
-    @Override
-    public String toString() {
-        return "AbstractValidationOutcome{" +
-                "message='" + message + '\'' +
-                ", validationOutcome=" + validationOutcome +
-                '}';
-    }
 }

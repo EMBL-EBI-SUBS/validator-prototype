@@ -1,5 +1,6 @@
 package uk.ac.ebi.subs.validator.data;
 
+import lombok.ToString;
 import uk.ac.ebi.subs.data.component.Archive;
 
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@ToString(callSuper = true)
 public class ValidationOutcome extends AbstractValidationOutcome implements Identifiable {
 
     private String version;
@@ -59,13 +61,4 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
         this.expectedOutcomes = expectedOutcomes;
     }
 
-    @Override
-    public String toString() {
-        return "ValidationOutcome{" +
-                "version='" + version + '\'' +
-                ", uuid=" + uuid +
-                ", validationResults=" + validationResults +
-                ", expectedOutcomes=" + expectedOutcomes +
-                "} " + super.toString();
-    }
 }
