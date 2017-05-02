@@ -56,21 +56,6 @@ public class ValidatorQueueConfig {
     }
 
     /**
-     * Create a {@code Binding} between the validation exchange and BioSamples sample validation queue
-     * using the routing key of deleted samples related to BioSamples.
-     *
-     * @param biosamplesSampleQueue {@code Queue} for validating BioSamples related samples
-     * @param validationExchange {@code TopicExchange} for validation
-     * @return a {@code Binding} between the validation exchange and BioSamples sample validation queue
-     * using the routing key of deleted samples related to BioSamples.
-     */
-    @Bean
-    Binding validationForDeletedBiosamplesSampleBinding(Queue biosamplesSampleQueue, TopicExchange validationExchange) {
-        return BindingBuilder.bind(biosamplesSampleQueue).to(validationExchange)
-                .with(RoutingKeys.EVENT_BIOSAMPLES_SAMPLE_DELETED);
-    }
-
-    /**
      * Instantiate a {@code Queue} for validate samples related to ENA.
      *
      * @return an instance of a {@code Queue} for validate samples related to ENA.
@@ -111,21 +96,6 @@ public class ValidatorQueueConfig {
     }
 
     /**
-     * Create a {@code Binding} between the validation exchange and ENA sample validation queue
-     * using the routing key of deleted samples related to ENA.
-     *
-     * @param enaSampleQueue {@code Queue} for validating ENA related samples
-     * @param validationExchange {@code TopicExchange} for validation
-     * @return a {@code Binding} between the validation exchange and ENA sample validation queue
-     * using the routing key of deleted samples related to ENA.
-     */
-    @Bean
-    Binding validationForDeletedENASampleBinding(Queue enaSampleQueue, TopicExchange validationExchange) {
-        return BindingBuilder.bind(enaSampleQueue).to(validationExchange)
-                .with(RoutingKeys.EVENT_ENA_SAMPLE_DELETED);
-    }
-
-    /**
      * Instantiate a {@code Queue} for validate samples related to Array Express.
      *
      * @return an instance of a {@code Queue} for validate samples related to Array Express.
@@ -163,20 +133,5 @@ public class ValidatorQueueConfig {
     Binding validationForUpdatedAESampleBinding(Queue aeSampleQueue, TopicExchange validationExchange) {
         return BindingBuilder.bind(aeSampleQueue).to(validationExchange)
                 .with(RoutingKeys.EVENT_AE_SAMPLE_UPDATED);
-    }
-
-    /**
-     * Create a {@code Binding} between the validation exchange and Array Express sample validation queue
-     * using the routing key of deleted samples related to Array Express.
-     *
-     * @param aeSampleQueue {@code Queue} for validating Array Express related samples
-     * @param validationExchange {@code TopicExchange} for validation
-     * @return a {@code Binding} between the validation exchange and Array Express sample validation queue
-     * using the routing key of deleted samples related to Array Express.
-     */
-    @Bean
-    Binding validationForDeletedAESampleBinding(Queue aeSampleQueue, TopicExchange validationExchange) {
-        return BindingBuilder.bind(aeSampleQueue).to(validationExchange)
-                .with(RoutingKeys.EVENT_AE_SAMPLE_DELETED);
     }
 }
