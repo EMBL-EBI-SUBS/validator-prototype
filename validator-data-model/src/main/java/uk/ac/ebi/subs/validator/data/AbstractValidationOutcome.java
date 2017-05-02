@@ -21,4 +21,12 @@ public abstract class AbstractValidationOutcome {
     public void setValidationOutcome(ValidationOutcomeEnum validationOutcome) {
         this.validationOutcome = validationOutcome;
     }
+
+    @Override
+    public String toString() {
+        return "AbstractValidationOutcome{" +
+                "message='" + message + '\'' +
+                ", validationOutcome=" + validationOutcome +
+                '}';
+    }
 }

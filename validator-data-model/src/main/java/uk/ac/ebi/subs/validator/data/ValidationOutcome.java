@@ -58,4 +58,14 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
     public void setExpectedOutcomes(Map<Archive, Boolean> expectedOutcomes) {
         this.expectedOutcomes = expectedOutcomes;
     }
+
+    @Override
+    public String toString() {
+        return "ValidationOutcome{" +
+                "version='" + version + '\'' +
+                ", uuid=" + uuid +
+                ", validationResults=" + validationResults +
+                ", expectedOutcomes=" + expectedOutcomes +
+                "} " + super.toString();
+    }
 }

@@ -35,4 +35,14 @@ public class EntityValidationOutcome extends AbstractValidationOutcome implement
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
+
+
+    @Override
+    public String toString() {
+        return "EntityValidationOutcome{" +
+                "version='" + version + '\'' +
+                ", uuid=" + uuid +
+                ", archive=" + archive +
+                "} " + super.toString();
+    }
 }
