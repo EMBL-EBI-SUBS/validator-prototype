@@ -17,11 +17,12 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
     private List<EntityValidationOutcome> validationResults;
     private Map<Archive, Boolean> expectedOutcomes;
 
-    public ValidationOutcome(List<Archive> expectedOutcomes) {
+    public ValidationOutcome(List<Archive> expectedOutcomes, String entityUUid) {
         this.expectedOutcomes = new HashMap<>();
         for (Archive outcome : expectedOutcomes) {
             this.expectedOutcomes.put(outcome, false);
         }
+        this.setEntityUuid(entityUUid);
         this.setValidationOutcome(ValidationOutcomeEnum.Pending);
     }
 

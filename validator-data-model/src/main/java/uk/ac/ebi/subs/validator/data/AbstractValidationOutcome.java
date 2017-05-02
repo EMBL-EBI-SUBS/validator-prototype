@@ -9,6 +9,8 @@ public abstract class AbstractValidationOutcome {
 
     private ValidationOutcomeEnum validationOutcome = ValidationOutcomeEnum.Pending;
 
+    private String entityUuid;
+
     public String getMessage() {
         return message;
     }
@@ -25,4 +27,11 @@ public abstract class AbstractValidationOutcome {
         this.validationOutcome = validationOutcome;
     }
 
+    public String getEntityUuid() {
+        return entityUuid;
+    }
+
+    public void setEntityUuid(String entityUuid) {
+        this.entityUuid = entityUuid;
+    }
 }
