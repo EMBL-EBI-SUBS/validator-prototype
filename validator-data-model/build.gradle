@@ -1,0 +1,19 @@
+version '1.0.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'uk.ac.ebi.subs', name: 'subs-data-model', version: '1.0.0-SNAPSHOT'
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.12'
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+}
+
+bootRepackage.enabled = false
