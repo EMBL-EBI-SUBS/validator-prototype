@@ -2,6 +2,9 @@ package uk.ac.ebi.subs.validator.data;
 
 import lombok.ToString;
 
+/**
+  * Basic validation outcome properties that any such object should have
+  */
 @ToString
 public abstract class AbstractValidationOutcome {
 

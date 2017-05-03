@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+  * Validation outcome document to store all the validation results
+  */
 @ToString(callSuper = true)
 public class ValidationOutcome extends AbstractValidationOutcome implements Identifiable {
 
@@ -19,8 +22,8 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
 
     public ValidationOutcome(List<Archive> expectedOutcomes, String entityUUid) {
         this.expectedOutcomes = new HashMap<>();
-        for (Archive outcome : expectedOutcomes) {
-            this.expectedOutcomes.put(outcome, false);
+        for (Archive archive : expectedOutcomes) {
+            this.expectedOutcomes.put(archive, false);
         }
         this.setEntityUuid(entityUUid);
         this.setValidationOutcome(ValidationOutcomeEnum.Pending);

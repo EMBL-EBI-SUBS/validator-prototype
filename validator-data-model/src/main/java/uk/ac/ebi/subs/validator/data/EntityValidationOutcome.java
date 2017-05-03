@@ -5,6 +5,9 @@ import uk.ac.ebi.subs.data.component.Archive;
 
 import java.util.UUID;
 
+/**
+  * Validation entity outcome document to store an entity validation result for a specific rule set
+  */
 @ToString(callSuper = true)
 public class EntityValidationOutcome extends AbstractValidationOutcome implements Identifiable {
 
@@ -39,4 +42,11 @@ public class EntityValidationOutcome extends AbstractValidationOutcome implement
         this.uuid = uuid;
     }
 
+    public Archive getArchive() {
+        return archive;
+    }
+
+    public void setArchive(Archive archive) {
+        this.archive = archive;
+    }
 }
