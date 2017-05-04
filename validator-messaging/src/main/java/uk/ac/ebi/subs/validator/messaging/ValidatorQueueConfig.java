@@ -142,7 +142,7 @@ public class ValidatorQueueConfig {
      */
     @Bean
     Queue validationResultQueue() {
-        return new Queue(Queues.VALIDATION_RESULTS, true);
+        return new Queue(Queues.VALIDATION_RESULT, true);
     }
 
     /**
