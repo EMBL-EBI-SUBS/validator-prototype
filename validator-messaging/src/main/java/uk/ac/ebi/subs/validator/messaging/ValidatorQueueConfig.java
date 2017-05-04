@@ -134,4 +134,69 @@ public class ValidatorQueueConfig {
         return BindingBuilder.bind(aeSampleQueue).to(validationExchange)
                 .with(RoutingKeys.EVENT_AE_SAMPLE_UPDATED);
     }
+
+    /**
+     * Instantiate a {@code Queue} for publish validation results.
+     *
+     * @return an instance of a {@code Queue} for publish validation results.
+     */
+    @Bean
+    Queue validationResultQueue() {
+        return new Queue(Queues.VALIDATION_RESULT, true);
+    }
+
+    /**
+     * Create a {@code Binding} between the validation exchange and validation result queue
+     * using the routing key of successful validation.
+     *
+     * @param validationResultQueue {@code Queue} for validation results
+     * @param validationExchange {@code TopicExchange} for validation
+     * @return a {@code Binding} between the validation exchange and validation result queue
+     * using the routing key of successful validation.
+     */
+    @Bean
+    Binding validationResultSuccessBinding(Queue validationResultQueue, TopicExchange validationExchange) {
+        return BindingBuilder.bind(validationResultQueue).to(validationExchange)
+                .with(RoutingKeys.EVENT_VALIDATION_SUCCESS);
+    }
+
+    /**
+     * Create a {@code Binding} between the validation exchange and validation result queue
+     * using the routing key of erred validation.
+     *
+     * @param validationResultQueue {@code Queue} for validation results
+     * @param validationExchange {@code TopicExchange} for validation
+     * @return a {@code Binding} between the validation exchange and validation result queue
+     * using the routing key of erred validation.
+     */
+    @Bean
+    Binding validationResultErrorBinding(Queue validationResultQueue, TopicExchange validationExchange) {
+        return BindingBuilder.bind(validationResultQueue).to(validationExchange)
+                .with(RoutingKeys.EVENT_VALIDATION_ERROR);
+    }
+
+    /**
+     * Instantiate a {@code Queue} for publish events related to the outcome document.
+     *
+     * @return an instance of a {@code Queue} for publish events related to the outcome document.
+     */
+    @Bean
+    Queue outcomeDocumentQueue() {
+        return new Queue(Queues.OUTCOME_DOCUMENT_UPDATE, true);
+    }
+
+    /**
+     * Create a {@code Binding} between the validation exchange and the outcome document queue
+     * using the routing key of outcome document updated.
+     *
+     * @param outcomeDocumentQueue {@code Queue} for outcome document events
+     * @param validationExchange {@code TopicExchange} for validation
+     * @return a {@code Binding} between the validation exchange and the outcome document queue
+     * using the routing key of outcome document updated.
+     */
+    @Bean
+    Binding outcomeDocumentUpdatedBinding(Queue outcomeDocumentQueue, TopicExchange validationExchange) {
+        return BindingBuilder.bind(outcomeDocumentQueue).to(validationExchange)
+                .with(RoutingKeys.EVENT_OUTCOME_DOCUMENT_UPDATED);
+    }
 }
