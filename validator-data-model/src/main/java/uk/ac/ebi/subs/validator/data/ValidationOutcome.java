@@ -1,6 +1,8 @@
 package uk.ac.ebi.subs.validator.data;
 
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import uk.ac.ebi.subs.data.component.Archive;
 
 import java.util.HashMap;
@@ -12,21 +14,25 @@ import java.util.UUID;
   * Validation outcome document to store all the validation results
   */
 @ToString(callSuper = true)
+@Document
 public class ValidationOutcome extends AbstractValidationOutcome implements Identifiable {
 
+    @Id
+    private String uuid;
     private String version;
-    private UUID uuid;
 
+    private List<Archive> expectedArchives;
     private List<EntityValidationOutcome> validationResults;
     private Map<Archive, Boolean> expectedOutcomes;
 
-    public ValidationOutcome(List<Archive> expectedOutcomes, String entityUUid) {
-        this.expectedOutcomes = new HashMap<>();
-        for (Archive archive : expectedOutcomes) {
-            this.expectedOutcomes.put(archive, false);
-        }
-        this.setEntityUuid(entityUUid);
-        this.setValidationOutcome(ValidationOutcomeEnum.Pending);
+    @Override
+    public String getUuid() {
+        return uuid;
+    }
+
+    @Override
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     @Override
@@ -39,14 +45,12 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
         this.version = version;
     }
 
-    @Override
-    public UUID getUuid() {
-        return uuid;
+    public List<Archive> getExpectedArchives() {
+        return expectedArchives;
     }
 
-    @Override
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setExpectedArchives(List<Archive> expectedArchives) {
+        this.expectedArchives = expectedArchives;
     }
 
     public List<EntityValidationOutcome> getValidationResults() {
@@ -64,5 +68,4 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
     public void setExpectedOutcomes(Map<Archive, Boolean> expectedOutcomes) {
         this.expectedOutcomes = expectedOutcomes;
     }
-
 }

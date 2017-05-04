@@ -11,7 +11,7 @@ public interface Identifiable {
 
     public void setVersion(String version);
 
-    public UUID getUuid();
+    public String getUuid();
 
-    public void setUuid(UUID uuid);
+    public void setUuid(String uuid);
 }

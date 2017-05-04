@@ -12,7 +12,7 @@ import java.util.UUID;
 public class EntityValidationOutcome extends AbstractValidationOutcome implements Identifiable {
 
     private String version;
-    private UUID uuid;
+    private String uuid;
 
     private Archive archive;
 
@@ -33,12 +33,12 @@ public class EntityValidationOutcome extends AbstractValidationOutcome implement
     }
 
     @Override
-    public UUID getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
     @Override
-    public void setUuid(UUID uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
