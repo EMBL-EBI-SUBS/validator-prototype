@@ -3,8 +3,6 @@ package uk.ac.ebi.subs.validator.data;
 import lombok.ToString;
 import uk.ac.ebi.subs.data.component.Archive;
 
-import java.util.UUID;
-
 /**
   * Validation entity outcome document to store an entity validation result for a specific rule set
   */
