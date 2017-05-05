@@ -1,12 +1,12 @@
-package uk.ac.ebi.subs.validator.biosamples;
+package uk.ac.ebi.subs.validator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BiosamplesValidatorApplication {
+public class MockValidatorsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BiosamplesValidatorApplication.class, args);
+        SpringApplication.run(MockValidatorsApplication.class, args);
     }
 }
