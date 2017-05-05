@@ -3,5 +3,8 @@ rootProject.name = 'validator-prototype'
 include 'validator-core'
 include 'validator-messaging'
 include 'validator-coordinator'
+include 'validator-aggregator'
 
 include 'mock-validators'
+include 'validator-aggregator'
+
