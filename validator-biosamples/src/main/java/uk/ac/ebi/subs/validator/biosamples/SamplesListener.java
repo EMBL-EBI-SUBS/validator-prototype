@@ -9,7 +9,10 @@ import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.validator.data.EntityValidationOutcome;
+import uk.ac.ebi.subs.validator.data.ValidationOutcomeEnum;
+import uk.ac.ebi.subs.validator.messaging.Exchanges;
 import uk.ac.ebi.subs.validator.messaging.Queues;
+import uk.ac.ebi.subs.validator.messaging.RoutingKeys;
 
 @Service
 public class SamplesListener {
@@ -32,6 +35,15 @@ public class SamplesListener {
 
         EntityValidationOutcome validationOutcome = samplesValidator.validate(sample);
 
-        //rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.);
+        sendResults(validationOutcome);
+    }
+
+    private void sendResults(EntityValidationOutcome validationOutcome) {
+        //Fpr testing purposes we'll use sleep to test asynchronously
+        if (validationOutcome.getValidationOutcome().equals(ValidationOutcomeEnum.Error)) {
+            rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_ERROR, Queues.VALIDATION_RESULT);
+        } else {
+            rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_SUCCESS, Queues.VALIDATION_RESULT);
+        }
     }
 }
