@@ -5,23 +5,23 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import uk.ac.ebi.subs.data.component.Archive;
 import uk.ac.ebi.subs.validator.data.ValidationOutcome;
-import uk.ac.ebi.subs.validator.repository.repository.ValidationOutcomeRepository;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = TestRepositoryApplication.class)
+@SpringBootTest(classes = ValidationOutcomeRepository.class)
+@EnableAutoConfiguration
 public class ValidationOutcomeRepositoryTest {
 
     @Autowired
@@ -50,7 +50,6 @@ public class ValidationOutcomeRepositoryTest {
 
         validationOutcomeRepository.insert(validationOutcome);
     }
-
 
     @Test
     public void testPersistValidationOutcome() {
