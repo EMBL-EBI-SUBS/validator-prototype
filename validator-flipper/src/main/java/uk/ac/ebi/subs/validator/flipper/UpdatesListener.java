@@ -34,19 +34,15 @@ public class UpdatesListener {
     public void processUpdate(String uuid) {
         ValidationOutcome validationOutcome = repository.findOne(uuid);
 
-        boolean isValidationDone = flipStatusIfRequired(validationOutcome);
-
-        if (isValidationDone) {
-            logger.info("Validation outcome document with id {} is completed.", uuid);
-        }
+        flipStatusIfRequired(validationOutcome, uuid);
     }
 
-    private boolean flipStatusIfRequired(ValidationOutcome validationOutcome) {
+    private void flipStatusIfRequired(ValidationOutcome validationOutcome, String uuid) {
         Map<Archive, Boolean> validationResults = validationOutcome.getExpectedOutcomes();
         if (!validationResults.values().contains(false)){
             validationOutcome.setValidationOutcome(ValidationOutcomeEnum.Complete);
-            return true;
+
+            logger.info("Validation outcome document with id {} is completed.", uuid);
         }
-        return false;
     }
 }
