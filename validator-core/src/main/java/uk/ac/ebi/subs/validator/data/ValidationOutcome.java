@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import uk.ac.ebi.subs.data.component.Archive;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
     private String version;
 
     private List<Archive> expectedArchives;
-    private List<EntityValidationOutcome> validationResults;
+    private List<EntityValidationOutcome> validationResults = new ArrayList<>();
     private Map<Archive, Boolean> expectedOutcomes;
 
     @Override
