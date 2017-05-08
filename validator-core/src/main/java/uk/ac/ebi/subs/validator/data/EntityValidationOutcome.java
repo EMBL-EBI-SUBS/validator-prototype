@@ -11,7 +11,7 @@ public class EntityValidationOutcome extends AbstractValidationOutcome implement
 
     private String version;
     private String uuid;
-    private String envelopeUUID;
+    private String outcomeDocumentUUID;
 
     private Archive archive;
 
@@ -50,11 +50,11 @@ public class EntityValidationOutcome extends AbstractValidationOutcome implement
     }
 
 
-    public String getEnvelopeUUID() {
-        return envelopeUUID;
+    public String getOutcomeDocumentUUID() {
+        return outcomeDocumentUUID;
     }
 
-    public void setEnvelopeUUID(String envelopeUUID) {
-        this.envelopeUUID = envelopeUUID;
+    public void setOutcomeDocumentUUID(String outcomeDocumentUUID) {
+        this.outcomeDocumentUUID = outcomeDocumentUUID;
     }
 }
