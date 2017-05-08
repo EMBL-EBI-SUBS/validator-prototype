@@ -35,7 +35,6 @@ public class AeSamplesListener {
         logger.debug("Received sample.");
 
         EntityValidationOutcome validationOutcome = samplesValidator.validate(sample);
-        validationOutcome.setArchive(Archive.ArrayExpress);
 
         sendResults(validationOutcome);
     }

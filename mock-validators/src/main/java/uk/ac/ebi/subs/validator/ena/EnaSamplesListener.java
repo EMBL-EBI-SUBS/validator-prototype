@@ -33,7 +33,6 @@ public class EnaSamplesListener {
         logger.debug("Received sample.");
 
         EntityValidationOutcome validationOutcome = samplesValidator.validate(sample);
-        validationOutcome.setArchive(Archive.Ena);
 
         sendResults(validationOutcome);
     }
