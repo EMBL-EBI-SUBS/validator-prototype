@@ -1,11 +1,34 @@
 package uk.ac.ebi.subs.validator.data;
 
 /**
-  * Controlled vocabulary for validation outcomes
-  */
+ * Controlled vocabulary for validation outcomes
+ *
+ * <li>{@link #Pending}</li>
+ * <li>{@link #Pass}</li>
+ * <li>{@link #Error}</li>
+ * <li>{@link #Warning}</li>
+ * <li>{@link #Complete}</li>
+ */
 public enum ValidationOutcomeEnum {
-    Pending,    // Waiting for validation result
-    Pass,       // We will accept this
-    Error,      // We will not accept this
-    Warning     // We will accept this, but you may wish to reconsider
+    /**
+     * Waiting for validation result
+     */
+    Pending,
+    /**
+     * All validation results are accounted for,
+     * to be used only on {@link uk.ac.ebi.subs.validator.data.ValidationOutcome}
+     */
+    Complete,
+    /**
+     * We will accept this
+     */
+    Pass,
+    /**
+     * We will not accept this
+     */
+    Error,
+    /**
+     * We will accept this, but you may wish to reconsider
+     */
+    Warning
 }
