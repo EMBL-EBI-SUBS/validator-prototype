@@ -6,9 +6,9 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.converter.MessageConverter;
-import uk.ac.ebi.subs.data.component.Archive;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.validator.data.EntityValidationOutcome;
+import uk.ac.ebi.subs.validator.data.ValidationMessageEnvelope;
 import uk.ac.ebi.subs.validator.data.ValidationOutcomeEnum;
 import uk.ac.ebi.subs.validator.messaging.Exchanges;
 import uk.ac.ebi.subs.validator.messaging.Queues;
@@ -29,10 +29,11 @@ public class EnaSamplesListener {
     }
 
     @RabbitListener(queues = Queues.ENA_SAMPLE_VALIDATION)
-    public void handleSamples(Sample sample) {
-        logger.debug("Received sample.");
+    public void handleSamples(ValidationMessageEnvelope<Sample> messageEnvelope) {
+        logger.debug("Received sample message.");
 
-        EntityValidationOutcome validationOutcome = samplesValidator.validate(sample);
+        EntityValidationOutcome validationOutcome = samplesValidator.validate(messageEnvelope.getEntityToValidate());
+        validationOutcome.setOutcomeDocumentUUID(messageEnvelope.getOutcomeDocumentUUID());
 
         sendResults(validationOutcome);
     }
