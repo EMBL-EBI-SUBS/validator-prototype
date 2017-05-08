@@ -40,11 +40,10 @@ public class AeSamplesListener {
     }
 
     private void sendResults(EntityValidationOutcome validationOutcome) {
-        //Fpr testing purposes we'll use sleep to test asynchronously
         if (validationOutcome.getValidationOutcome().equals(ValidationOutcomeEnum.Error)) {
-            rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_ERROR, Queues.VALIDATION_RESULT);
+            rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_ERROR, validationOutcome);
         } else {
-            rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_SUCCESS, Queues.VALIDATION_RESULT);
+            rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_SUCCESS, validationOutcome);
         }
     }
 }
