@@ -35,7 +35,6 @@ public class SamplesListener {
         logger.debug("Received sample.");
 
         EntityValidationOutcome validationOutcome = samplesValidator.validate(sample);
-        validationOutcome.setArchive(Archive.BioSamples);
 
         sendResults(validationOutcome);
     }
