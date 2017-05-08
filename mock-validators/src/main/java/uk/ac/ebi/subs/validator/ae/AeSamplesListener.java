@@ -7,6 +7,7 @@ import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.stereotype.Service;
+import uk.ac.ebi.subs.data.component.Archive;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.validator.data.EntityValidationOutcome;
 import uk.ac.ebi.subs.validator.data.ValidationOutcomeEnum;
@@ -34,6 +35,7 @@ public class AeSamplesListener {
         logger.debug("Received sample.");
 
         EntityValidationOutcome validationOutcome = samplesValidator.validate(sample);
+        validationOutcome.setArchive(Archive.ArrayExpress);
 
         sendResults(validationOutcome);
     }
