@@ -15,6 +15,19 @@ What you'll need to run the validator-prototype:
 
 Follow any of the links to download and find instructions on how to install these.
 
+### Installing
+
+Clone the repository:
+```
+git clone https://github.com/EMBL-EBI-SUBS/validator-prototype.git
+```
+Build the project:
+```
+cd validator-prototype
+gradle build
+```
+And make sure everything is, ok as in: `BUILD SUCCESSFUL`
+
 ## License
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (Apache 2.0).
