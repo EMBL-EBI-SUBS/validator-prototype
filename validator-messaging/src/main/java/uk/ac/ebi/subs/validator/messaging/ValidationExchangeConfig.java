@@ -21,4 +21,14 @@ public class ValidationExchangeConfig {
     TopicExchange validationExchange() {
         return new TopicExchange(Exchanges.VALIDATION);
     }
+
+    /**
+     * Instantiate a {@code TopicExchange} for USI submissions.
+     *
+     * @return an instance of {@code TopicExchange} for USI submissions.
+     */
+    @Bean
+    TopicExchange submissionExchange() {
+        return new TopicExchange(Exchanges.SUBMISSIONS);
+    }
 }

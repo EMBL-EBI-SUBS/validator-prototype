@@ -16,6 +16,42 @@ import org.springframework.context.annotation.Configuration;
 public class ValidatorQueueConfig {
 
     /**
+     * Instantiate a {@code Queue} for validate published submissions.
+     *
+     * @return an instance of a {@code Queue} for validate published submissions.
+     */
+    @Bean
+    Queue validatorQueue() {
+        return new Queue(Queues.SUBMISSION_VALIDATOR, true);
+    }
+
+    /**
+     * Create a {@code Binding} between the submission exchange and validation queue using the routing key of created submissions.
+     *
+     * @param validatorQueue {@code Queue} for validating submissions before submitting them
+     * @param submissionExchange {@code TopicExchange} for submissions
+     * @return a {@code Binding} between the submission exchange and validation queue using the routing key of created submissions.
+     */
+    @Bean
+    Binding validationForCreatedSubmissionBinding(Queue validatorQueue, TopicExchange submissionExchange) {
+        return BindingBuilder.bind(validatorQueue).to(submissionExchange)
+                .with(RoutingKeys.SUBMISSION_VALIDATOR_SUBMISSION_CREATED);
+    }
+
+    /**
+     * Create a {@code Binding} between the submission exchange and validation queue using the routing key of updated submissions.
+     *
+     * @param validatorQueue {@code Queue} for validating submissions before submitting them
+     * @param submissionExchange {@code TopicExchange} for submissions
+     * @return a {@code Binding} between the submission exchange and validation queue using the routing key of updated submissions.
+     */
+    @Bean
+    Binding validationForUpdatedSubmissionBinding(Queue validatorQueue, TopicExchange submissionExchange) {
+        return BindingBuilder.bind(validatorQueue).to(submissionExchange)
+                .with(RoutingKeys.SUBMISSION_VALIDATOR_SUBMISSION_UPDATED);
+    }
+
+    /**
      * Instantiate a {@code Queue} for validate samples related to BioSamples.
      *
      * @return an instance of a {@code Queue} for validate samples related to BioSamples.

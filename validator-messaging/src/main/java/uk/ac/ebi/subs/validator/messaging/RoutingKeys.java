@@ -7,6 +7,9 @@ package uk.ac.ebi.subs.validator.messaging;
  */
 public class RoutingKeys {
 
+    public static final String SUBMISSION_VALIDATOR_SUBMISSION_CREATED = "usi.submission.created";
+    public static final String SUBMISSION_VALIDATOR_SUBMISSION_UPDATED = "usi.submission.updated";
+
     public static final String EVENT_BIOSAMPLES_SAMPLE_CREATED = "biosamples.sample.created";
     public static final String EVENT_BIOSAMPLES_SAMPLE_UPDATED = "biosamples.sample.updated";
 
