@@ -4,6 +4,6 @@ include 'validator-core'
 include 'validator-messaging'
 include 'validator-coordinator'
 include 'validator-aggregator'
-include 'validator-flipper'
+include 'validator-status-flipper'
 
 include 'mock-validators'
