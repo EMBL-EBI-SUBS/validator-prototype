@@ -1,5 +1,6 @@
 package uk.ac.ebi.subs.validator.ae;
 
+import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.Archive;
 import uk.ac.ebi.subs.data.submittable.Sample;
 import uk.ac.ebi.subs.validator.data.EntityValidationOutcome;
@@ -8,6 +9,7 @@ import uk.ac.ebi.subs.validator.data.ValidationOutcomeEnum;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Service
 public class AeSamplesValidator {
 
     public static final String SUCCESS_MESSAGE = "Passed ArrayExpress validation with no errors.";
