@@ -39,7 +39,7 @@ cd validator-coordinator
 gradle bootRun
 ```
 ```
-cd mock-coordinators
+cd mock-validators
 gradle bootRun
 ```
 ```
