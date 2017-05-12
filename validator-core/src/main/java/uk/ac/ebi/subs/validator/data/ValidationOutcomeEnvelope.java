@@ -3,6 +3,9 @@ package uk.ac.ebi.subs.validator.data;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * ValidationOutcomeEnvelope, object to store all the ValidationOutcomes of a single submission.
+ */
 public class ValidationOutcomeEnvelope implements Identifiable {
 
     private String uuid;
