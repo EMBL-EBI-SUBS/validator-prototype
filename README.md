@@ -4,7 +4,7 @@
 This is a prototype version of the meta-data validator for the USI project.
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 What you'll need to run the validator-prototype:
@@ -16,10 +16,14 @@ What you'll need to run the validator-prototype:
 Follow any of the links to download and find instructions on how to install these.
 
 ### Installing
-
 Clone the repository:
 ```
 git clone https://github.com/EMBL-EBI-SUBS/validator-prototype.git
+```
+Start up both MongoDB and RabbitMQ, if you are using :beer: [Homebrew](https://brew.sh/) do:
+```
+brew services start mongodb
+brew services start rabbitmq
 ```
 Build the project:
 ```
@@ -27,6 +31,26 @@ cd validator-prototype
 gradle build
 ```
 And make sure everything is, ok as in: `BUILD SUCCESSFUL`
+
+### Starting
+Start application components by doing (the order is not important):
+```
+cd validator-coordinator
+gradle bootRun
+```
+```
+cd mock-coordinators
+gradle bootRun
+```
+```
+cd validator-aggregator
+gradle bootRun
+```
+```
+cd validator-status-flipper
+gradle bootRun
+```
+You can now start using this prototype by publishing a [SubmissionEnvelope](https://github.com/EMBL-EBI-SUBS/subs/blob/master/subs-processing-model/src/main/java/uk/ac/ebi/subs/processing/SubmissionEnvelope.java) in the `SUBMISSION_VALIDATOR` queue. You should then be able to see the dummy validation results on your local MongoDB.
 
 ## License
 
