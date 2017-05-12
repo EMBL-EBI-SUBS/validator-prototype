@@ -15,6 +15,9 @@ public class EntityValidationOutcome extends AbstractValidationOutcome implement
 
     private Archive archive;
 
+    public EntityValidationOutcome() {
+    }
+
     public EntityValidationOutcome(Archive archive, String entityUuid) {
         this.archive = archive;
         this.setEntityUuid(entityUuid);

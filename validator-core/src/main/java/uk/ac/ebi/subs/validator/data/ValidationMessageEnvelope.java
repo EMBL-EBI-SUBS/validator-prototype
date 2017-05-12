@@ -10,6 +10,9 @@ public class ValidationMessageEnvelope<T> {
     private String outcomeDocumentUUID;
     private T entityToValidate;
 
+    public ValidationMessageEnvelope() {
+    }
+
     public ValidationMessageEnvelope(String outcomeDocumentUUID, T entityToValidate) {
         this.outcomeDocumentUUID = outcomeDocumentUUID;
         this.entityToValidate = entityToValidate;
