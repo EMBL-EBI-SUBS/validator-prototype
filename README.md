@@ -30,7 +30,7 @@ Build the project:
 cd validator-prototype
 gradle build
 ```
-And make sure everything is, ok as in: `BUILD SUCCESSFUL`
+And make sure everything is ok, as in: `BUILD SUCCESSFUL`
 
 ### Starting
 Start application components by doing (the order is not important):
