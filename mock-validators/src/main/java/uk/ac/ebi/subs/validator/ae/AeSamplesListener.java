@@ -33,6 +33,9 @@ public class AeSamplesListener {
         logger.debug("Received sample message.");
 
         EntityValidationOutcome validationOutcome = samplesValidator.validate(messageEnvelope.getEntityToValidate());
+
+        logger.debug("Array Express Sample validation finished.");
+
         validationOutcome.setOutcomeDocumentUUID(messageEnvelope.getOutcomeDocumentUUID());
 
         sendResults(validationOutcome);
@@ -40,8 +43,10 @@ public class AeSamplesListener {
 
     private void sendResults(EntityValidationOutcome validationOutcome) {
         if (validationOutcome.getValidationOutcome().equals(ValidationOutcomeEnum.Error)) {
+            logger.debug("Sending message: Array Express Sample validation failed.");
             rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_ERROR, validationOutcome);
         } else {
+            logger.debug("Sending message: Array Express Sample validation succeed.");
             rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_SUCCESS, validationOutcome);
         }
     }
