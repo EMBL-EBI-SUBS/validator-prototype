@@ -2,6 +2,7 @@ package uk.ac.ebi.subs.validator.data;
 
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import uk.ac.ebi.subs.data.component.Archive;
 
@@ -20,6 +21,7 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
     private String uuid;
     private String version;
 
+    @Indexed
     private String submissionId;
 
     private List<Archive> expectedArchives;
