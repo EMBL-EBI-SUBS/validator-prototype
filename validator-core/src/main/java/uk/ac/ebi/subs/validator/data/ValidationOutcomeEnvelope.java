@@ -1,7 +1,6 @@
 package uk.ac.ebi.subs.validator.data;
 
 import java.util.List;
-import java.util.UUID;
 
 public class ValidationOutcomeEnvelope implements Identifiable {
 
@@ -16,8 +15,6 @@ public class ValidationOutcomeEnvelope implements Identifiable {
 
     public ValidationOutcomeEnvelope(List<ValidationOutcome> validationOutcomeList) {
         this.validationOutcomeList = validationOutcomeList;
-        this.uuid = UUID.randomUUID().toString();
-        this.version = "0.0.1";
         this.status = StatusEnum.Pending;
     }
 
