@@ -48,6 +48,11 @@ public class EntityValidationOutcome extends AbstractValidationOutcome implement
         return archive;
     }
 
+    public void setArchive(Archive archive) {
+        this.archive = archive;
+    }
+
+
     public String getOutcomeDocumentUUID() {
         return outcomeDocumentUUID;
     }

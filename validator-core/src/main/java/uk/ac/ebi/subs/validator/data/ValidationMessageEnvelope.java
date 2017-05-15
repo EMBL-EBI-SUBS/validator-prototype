@@ -22,8 +22,15 @@ public class ValidationMessageEnvelope<T> {
         return outcomeDocumentUUID;
     }
 
+    public void setOutcomeDocumentUUID(String outcomeDocumentUUID) {
+        this.outcomeDocumentUUID = outcomeDocumentUUID;
+    }
+
     public T getEntityToValidate() {
         return entityToValidate;
     }
 
+    public void setEntityToValidate(T entityToValidate) {
+        this.entityToValidate = entityToValidate;
+    }
 }
