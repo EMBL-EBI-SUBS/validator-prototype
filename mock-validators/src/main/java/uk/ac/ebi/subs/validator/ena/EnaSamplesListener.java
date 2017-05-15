@@ -33,6 +33,9 @@ public class EnaSamplesListener {
         logger.debug("Received sample message.");
 
         EntityValidationOutcome validationOutcome = samplesValidator.validate(messageEnvelope.getEntityToValidate());
+
+        logger.debug("ENA Sample validation finished.");
+
         validationOutcome.setOutcomeDocumentUUID(messageEnvelope.getOutcomeDocumentUUID());
 
         sendResults(validationOutcome);
@@ -40,8 +43,10 @@ public class EnaSamplesListener {
 
     private void sendResults(EntityValidationOutcome validationOutcome) {
         if (validationOutcome.getValidationOutcome().equals(ValidationOutcomeEnum.Error)) {
+            logger.debug("Sending message: ENA Sample validation failed.");
             rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_ERROR, validationOutcome);
         } else {
+            logger.debug("Sending message: ENA Sample validation succeed.");
             rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_SUCCESS, validationOutcome);
         }
     }

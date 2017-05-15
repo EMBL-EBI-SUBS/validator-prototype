@@ -33,6 +33,9 @@ public class SamplesListener {
         logger.debug("Received sample message.");
 
         EntityValidationOutcome validationOutcome = samplesValidator.validate(messageEnvelope.getEntityToValidate());
+
+        logger.debug("BioSamples Sample validation finished.");
+
         validationOutcome.setOutcomeDocumentUUID(messageEnvelope.getOutcomeDocumentUUID());
 
 
@@ -41,8 +44,10 @@ public class SamplesListener {
 
     private void sendResults(EntityValidationOutcome validationOutcome) {
         if (validationOutcome.getValidationOutcome().equals(ValidationOutcomeEnum.Error)) {
+            logger.debug("Sending message: BioSamples Sample validation failed.");
             rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_ERROR, validationOutcome);
         } else {
+            logger.debug("Sending message: BioSamples Sample validation succeed.");
             rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_VALIDATION_SUCCESS, validationOutcome);
         }
     }
