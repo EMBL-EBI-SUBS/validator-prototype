@@ -20,6 +20,8 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
     private String uuid;
     private String version;
 
+    private String submissionId;
+
     private List<Archive> expectedArchives;
     private List<EntityValidationOutcome> validationResults = new ArrayList<>();
     private Map<Archive, Boolean> expectedOutcomes;
@@ -42,6 +44,14 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
     @Override
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getSubmissionId() {
+        return submissionId;
+    }
+
+    public void setSubmissionId(String submissionId) {
+        this.submissionId = submissionId;
     }
 
     public List<Archive> getExpectedArchives() {
