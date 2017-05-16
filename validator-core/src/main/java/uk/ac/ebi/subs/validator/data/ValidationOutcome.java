@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import uk.ac.ebi.subs.data.component.Archive;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
     private List<Archive> expectedArchives;
 
     private List<EntityValidationOutcome> validationResults = new ArrayList<>();
-    private Map<Archive, Boolean> expectedOutcomes;
+    private Map<Archive, Boolean> expectedOutcomes = new HashMap<>();
 
     @Override
     public String getUuid() {
