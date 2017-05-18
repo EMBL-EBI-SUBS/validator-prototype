@@ -2,11 +2,14 @@ package uk.ac.ebi.subs.validator.data;
 
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import uk.ac.ebi.subs.data.component.Archive;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +18,7 @@ import java.util.Map;
   */
 @ToString(callSuper = true)
 @Document
+@CompoundIndex(name = "submission_entity_id", def = "{'submissionId': 1, 'entityUuid': 1}")
 public class ValidationOutcome extends AbstractValidationOutcome implements Identifiable {
 
     @Id
@@ -24,9 +28,11 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
     @Indexed
     private String submissionId;
 
+    @Transient
     private List<Archive> expectedArchives;
+
     private List<EntityValidationOutcome> validationResults = new ArrayList<>();
-    private Map<Archive, Boolean> expectedOutcomes;
+    private Map<Archive, Boolean> expectedOutcomes = new HashMap<>();
 
     @Override
     public String getUuid() {

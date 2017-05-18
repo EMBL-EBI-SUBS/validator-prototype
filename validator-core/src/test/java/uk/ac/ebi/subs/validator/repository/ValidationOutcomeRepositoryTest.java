@@ -1,6 +1,7 @@
 package uk.ac.ebi.subs.validator.repository;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,9 +12,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import uk.ac.ebi.subs.data.component.Archive;
 import uk.ac.ebi.subs.validator.data.ValidationOutcome;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.hamcrest.core.Is.is;
@@ -27,13 +28,47 @@ public class ValidationOutcomeRepositoryTest {
     @Autowired
     ValidationOutcomeRepository validationOutcomeRepository;
 
-    ValidationOutcome validationOutcome;
-
-    List<Archive> expectedArchives;
+    private ValidationOutcome validationOutcome;
 
     @Before
     public void buildUp() {
-        expectedArchives = Arrays.asList(Archive.BioSamples, Archive.Ena);
+        Map<Archive, Boolean> expectedOutcomes = new HashMap<>();
+        expectedOutcomes.put(Archive.BioSamples, true);
+        expectedOutcomes.put(Archive.ArrayExpress, false);
+        expectedOutcomes.put(Archive.Ena, false);
+
+        validationOutcome = new ValidationOutcome();
+        validationOutcome.setUuid(UUID.randomUUID().toString());
+        validationOutcome.setExpectedOutcomes(expectedOutcomes);
+        validationOutcome.setVersion("1.0");
+        validationOutcome.setSubmissionId("123");
+        validationOutcome.setEntityUuid("44566");
+
+        // First
+        validationOutcomeRepository.insert(validationOutcome);
+
+        validationOutcome.setUuid(UUID.randomUUID().toString());
+        validationOutcome.setSubmissionId("456");
+        validationOutcome.setEntityUuid("98876");
+
+        // Second
+        validationOutcomeRepository.insert(validationOutcome);
+    }
+
+    @Test
+    public void persistValidationOutcomeTest() {
+        ValidationOutcome retrievedOutcome = validationOutcomeRepository.findOne(validationOutcome.getUuid());
+        System.out.println(retrievedOutcome);
+
+        assertThat(retrievedOutcome.getExpectedOutcomes().get(Archive.BioSamples), is(true));
+    }
+
+    @Test
+    public void findBySubmissionIdAndEntityUuidTest() {
+        List<ValidationOutcome> validationOutcomes = validationOutcomeRepository.findBySubmissionIdAndEntityUuid("123", "44566");
+        System.out.println(validationOutcomes);
+
+        Assert.assertEquals(1, validationOutcomes.size());
     }
 
     @After
@@ -41,24 +76,4 @@ public class ValidationOutcomeRepositoryTest {
         validationOutcomeRepository.deleteAll();
     }
 
-    private void persistValidationOutcome() {
-        validationOutcome = new ValidationOutcome();
-        validationOutcome.setUuid(UUID.randomUUID().toString());
-        validationOutcome.setExpectedArchives(expectedArchives);
-        validationOutcome.setExpectedOutcomes(new HashMap<>());
-        validationOutcome.getExpectedOutcomes().put(Archive.BioSamples, true);
-
-        validationOutcomeRepository.insert(validationOutcome);
-    }
-
-    @Test
-    public void testPersistValidationOutcome() {
-        persistValidationOutcome();
-
-        ValidationOutcome retrievedOutcome = validationOutcomeRepository.findOne(validationOutcome.getUuid());
-
-        System.out.println(retrievedOutcome);
-
-        assertThat(retrievedOutcome.getExpectedOutcomes().get(Archive.BioSamples), is(true));
-    }
 }
