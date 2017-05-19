@@ -1,7 +1,10 @@
 # Validator Prototype
 [![Build Status](https://travis-ci.org/EMBL-EBI-SUBS/validator-prototype.svg?branch=master)](https://travis-ci.org/EMBL-EBI-SUBS/validator-prototype)
 
-This is a prototype version of the meta-data validator for the USI project.
+**This is a prototype version of the meta-data validator for the USI project.**
+
+![image](validator-prototype.png)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
