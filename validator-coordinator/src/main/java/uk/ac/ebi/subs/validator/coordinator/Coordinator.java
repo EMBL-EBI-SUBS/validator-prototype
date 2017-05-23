@@ -15,8 +15,6 @@ import uk.ac.ebi.subs.validator.messaging.Queues;
 import uk.ac.ebi.subs.validator.messaging.RoutingKeys;
 import uk.ac.ebi.subs.validator.repository.ValidationOutcomeRepository;
 
-import java.util.List;
-
 @Component
 public class Coordinator {
     private static final Logger logger = LoggerFactory.getLogger(Coordinator.class);
@@ -34,30 +32,34 @@ public class Coordinator {
         this.rabbitMessagingTemplate = rabbitMessagingTemplate;
     }
 
+    /**
+     * Validator data entry point.
+     * @param envelope
+     */
     @RabbitListener(queues = Queues.SUBMISSION_VALIDATOR)
     public void processSubmission(SubmissionEnvelope envelope) {
-        logger.debug("Received validation request on submission {}", envelope.getSubmission().getId());
 
-        // For now we are only prototyping with samples
-        List<Sample> samples = envelope.getSamples();
-
-        // TODO - Extract this as soon as we expand beyond just samples
-        for (Sample sample : samples) {
-            logger.debug("Validate the following object: {}", sample);
-
-            ValidationOutcome validationOutcome = outcomeDocumentService.generateValidationOutcomeDocument(sample, envelope.getSubmission().getId());
-
-            repository.insert(validationOutcome);
-            logger.debug("Outcome document has been persisted into MongoDB with ID: {}", validationOutcome.getUuid());
-
-            ValidationMessageEnvelope<Sample> messageEnvelope = new ValidationMessageEnvelope<>(validationOutcome.getUuid(), sample);
-
-            logger.debug("Sending sample to validation queues");
-            rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_BIOSAMPLES_SAMPLE_CREATED, messageEnvelope);
-            rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_ENA_SAMPLE_CREATED, messageEnvelope);
-            rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_AE_SAMPLE_CREATED, messageEnvelope);
+        // We only receive a sample at a time
+        if (envelope.getSamples().size() == 1) {
+            Sample sample = envelope.getSamples().get(0);
+            logger.info("Received validation request on sample {}", sample.getId());
+            handleSample(sample, envelope.getSubmission().getId());
+        } else {
+            throw new IllegalArgumentException("Expected 1 sample, got [" + envelope.getSamples().size() + "] samples.");
         }
+    }
 
+    private void handleSample(Sample sample, String id) {
+        ValidationOutcome validationOutcome = outcomeDocumentService.generateValidationOutcomeDocument(sample, id);
+        repository.insert(validationOutcome);
+        logger.debug("Outcome document has been persisted into MongoDB with ID: {}", validationOutcome.getUuid());
+
+        ValidationMessageEnvelope<Sample> messageEnvelope = new ValidationMessageEnvelope<>(validationOutcome.getUuid(), sample);
+
+        logger.debug("Sending sample to validation queues");
+        rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_BIOSAMPLES_SAMPLE_CREATED, messageEnvelope);
+        rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_ENA_SAMPLE_CREATED, messageEnvelope);
+        rabbitMessagingTemplate.convertAndSend(Exchanges.VALIDATION, RoutingKeys.EVENT_AE_SAMPLE_CREATED, messageEnvelope);
     }
 
 }
