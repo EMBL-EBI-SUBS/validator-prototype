@@ -1,7 +1,5 @@
 package uk.ac.ebi.subs.validator.flipper;
 
-import org.junit.After;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +13,9 @@ import uk.ac.ebi.subs.validator.data.ValidationOutcome;
 import uk.ac.ebi.subs.validator.data.ValidationOutcomeEnum;
 import uk.ac.ebi.subs.validator.repository.ValidationOutcomeRepository;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -39,17 +39,9 @@ public class OutcomeDocumentServiceTest {
 
     @Before
     public void setUp() {
-        final String version = "1.2";
-        final String submissionId = "123";
-        final String entityUuid = "456";
-        existingValidationOutcome = createValidationOutcome(getInitialExpectedOutcomes(), version,
-                submissionId, entityUuid);
-        repository.insert(existingValidationOutcome);
-    }
-
-    @After
-    public void tearDown() {
         repository.deleteAll();
+        existingValidationOutcome = createValidationOutcome(getInitialExpectedOutcomes(), 3, "123", "456");
+        repository.insert(existingValidationOutcome);
     }
 
     @Test
@@ -97,8 +89,7 @@ public class OutcomeDocumentServiceTest {
 
     }
 
-    private ValidationOutcome createValidationOutcome(Map<Archive, Boolean> expectedOutcomes, String version,
-                                                      String submissionId, String entityUuid) {
+    private ValidationOutcome createValidationOutcome(Map<Archive, Boolean> expectedOutcomes, int version, String submissionId, String entityUuid) {
         ValidationOutcome validationOutcome = new ValidationOutcome();
         validationOutcome.setUuid(UUID.randomUUID().toString());
         validationOutcome.setExpectedOutcomes(expectedOutcomes);

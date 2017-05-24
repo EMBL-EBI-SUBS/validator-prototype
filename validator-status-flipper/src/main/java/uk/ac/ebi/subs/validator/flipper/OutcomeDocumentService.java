@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.subs.data.component.Archive;
-import uk.ac.ebi.subs.validator.data.EntityValidationOutcome;
 import uk.ac.ebi.subs.validator.data.ValidationOutcome;
 import uk.ac.ebi.subs.validator.data.ValidationOutcomeEnum;
 import uk.ac.ebi.subs.validator.repository.ValidationOutcomeRepository;
@@ -30,8 +29,7 @@ public class OutcomeDocumentService {
         ValidationOutcome validationOutcome = repository.findOne(uuid);
 
         if (validationOutcome != null) { // The queried document already has been deleted.
-            if (isLatestVersion(validationOutcome.getSubmissionId(), validationOutcome.getEntityUuid(),
-                    Double.valueOf(validationOutcome.getVersion()))) {
+            if (isLatestVersion(validationOutcome.getSubmissionId(), validationOutcome.getEntityUuid(), validationOutcome.getVersion())) {
                 flipStatusIfRequired(validationOutcome, uuid);
 
                 return true;
@@ -41,15 +39,15 @@ public class OutcomeDocumentService {
         return false;
     }
 
-    private boolean isLatestVersion(String submissionId, String entityUuid, double thisOutcomeVersion) {
+    private boolean isLatestVersion(String submissionId, String entityUuid, int thisOutcomeVersion) {
         List<ValidationOutcome> validationOutcomes = repository.findBySubmissionIdAndEntityUuid(submissionId, entityUuid);
 
         if (validationOutcomes.size() > 0) {
-            List<Double> doubleVersions = validationOutcomes.stream()
-                    .map(validationOutcome -> Double.valueOf(validationOutcome.getVersion()))
+            List<Integer> versions = validationOutcomes.stream()
+                    .map(validationOutcome -> validationOutcome.getVersion())
                     .collect(Collectors.toList());
 
-            double max = Collections.max(doubleVersions);
+            int max = Collections.max(versions);
             if (max > thisOutcomeVersion) {
                 return false;
             }

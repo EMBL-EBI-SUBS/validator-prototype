@@ -21,7 +21,7 @@ public class OutcomeDocumentService {
         ValidationOutcome outcome = repository.findOne(validationOutcome.getOutcomeDocumentUUID());
 
         if (outcome != null) {
-            if (isLatestVersion(outcome.getSubmissionId(), outcome.getEntityUuid(), Double.valueOf(outcome.getVersion()))) {
+            if (isLatestVersion(outcome.getSubmissionId(), outcome.getEntityUuid(), outcome.getVersion())) {
                 outcome.getValidationResults().add(validationOutcome);
                 outcome.getExpectedOutcomes().put(validationOutcome.getArchive(), true);
                 repository.save(outcome);
@@ -31,15 +31,15 @@ public class OutcomeDocumentService {
         return false;
     }
 
-    public boolean isLatestVersion(String submissionId, String entityUuid, double thisOutcomeVersion) {
+    public boolean isLatestVersion(String submissionId, String entityUuid, int thisOutcomeVersion) {
         List<ValidationOutcome> validationOutcomes = repository.findBySubmissionIdAndEntityUuid(submissionId, entityUuid);
 
         if (validationOutcomes.size() > 0) {
-            List<Double> doubleVersions = validationOutcomes.stream()
-                    .map(validationOutcome -> Double.valueOf(validationOutcome.getVersion()))
+            List<Integer> versions = validationOutcomes.stream()
+                    .map(validationOutcome -> validationOutcome.getVersion())
                     .collect(Collectors.toList());
 
-            double max = Collections.max(doubleVersions);
+            int max = Collections.max(versions);
             if (max > thisOutcomeVersion) {
                 return false;
             }
