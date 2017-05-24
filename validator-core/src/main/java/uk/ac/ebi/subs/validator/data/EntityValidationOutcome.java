@@ -9,7 +9,7 @@ import uk.ac.ebi.subs.data.component.Archive;
 @ToString(callSuper = true)
 public class EntityValidationOutcome extends AbstractValidationOutcome implements Identifiable {
 
-    private String version;
+    private int version;
     private String uuid;
     private String outcomeDocumentUUID;
 
@@ -25,12 +25,12 @@ public class EntityValidationOutcome extends AbstractValidationOutcome implement
     }
 
     @Override
-    public String getVersion() {
+    public int getVersion() {
         return version;
     }
 
     @Override
-    public void setVersion(String version) {
+    public void setVersion(int version) {
         this.version = version;
     }
 

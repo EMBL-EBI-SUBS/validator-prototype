@@ -23,7 +23,7 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
 
     @Id
     private String uuid;
-    private String version;
+    private int version;
 
     @Indexed
     private String submissionId;
@@ -45,12 +45,12 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
     }
 
     @Override
-    public String getVersion() {
+    public int getVersion() {
         return version;
     }
 
     @Override
-    public void setVersion(String version) {
+    public void setVersion(int version) {
         this.version = version;
     }
 

@@ -5,11 +5,11 @@ package uk.ac.ebi.subs.validator.data;
  */
 public interface Identifiable {
 
-    public String getVersion();
+    int getVersion();
 
-    public void setVersion(String version);
+    void setVersion(int version);
 
-    public String getUuid();
+    String getUuid();
 
-    public void setUuid(String uuid);
+    void setUuid(String uuid);
 }

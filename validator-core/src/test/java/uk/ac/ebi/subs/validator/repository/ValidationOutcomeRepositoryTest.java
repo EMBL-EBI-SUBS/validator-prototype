@@ -40,7 +40,7 @@ public class ValidationOutcomeRepositoryTest {
         validationOutcome = new ValidationOutcome();
         validationOutcome.setUuid(UUID.randomUUID().toString());
         validationOutcome.setExpectedOutcomes(expectedOutcomes);
-        validationOutcome.setVersion("1.0");
+        validationOutcome.setVersion(1);
         validationOutcome.setSubmissionId("123");
         validationOutcome.setEntityUuid("44566");
 
