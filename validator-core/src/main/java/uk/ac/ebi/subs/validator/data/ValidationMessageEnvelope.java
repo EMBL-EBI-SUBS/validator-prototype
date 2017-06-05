@@ -7,23 +7,23 @@ package uk.ac.ebi.subs.validator.data;
  */
 public class ValidationMessageEnvelope<T> {
 
-    private String outcomeDocumentUUID;
+    private String validationResultUUID;
     private T entityToValidate;
 
     public ValidationMessageEnvelope() {
     }
 
-    public ValidationMessageEnvelope(String outcomeDocumentUUID, T entityToValidate) {
-        this.outcomeDocumentUUID = outcomeDocumentUUID;
+    public ValidationMessageEnvelope(String validationResultUUID, T entityToValidate) {
+        this.validationResultUUID = validationResultUUID;
         this.entityToValidate = entityToValidate;
     }
 
-    public String getOutcomeDocumentUUID() {
-        return outcomeDocumentUUID;
+    public String getValidationResultUUID() {
+        return validationResultUUID;
     }
 
-    public void setOutcomeDocumentUUID(String outcomeDocumentUUID) {
-        this.outcomeDocumentUUID = outcomeDocumentUUID;
+    public void setValidationResultUUID(String validationResultUUID) {
+        this.validationResultUUID = validationResultUUID;
     }
 
     public T getEntityToValidate() {

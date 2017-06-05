@@ -9,14 +9,14 @@ package uk.ac.ebi.subs.validator.data;
  * <li>{@link #Warning}</li>
  * <li>{@link #Complete}</li>
  */
-public enum ValidationOutcomeEnum {
+public enum ValidationStatus {
     /**
      * Waiting for validation result
      */
     Pending,
     /**
      * All validation results are accounted for,
-     * to be used only on {@link uk.ac.ebi.subs.validator.data.ValidationOutcome}
+     * to be used only on {@link ValidationResult}
      */
     Complete,
     /**

@@ -7,21 +7,21 @@ import uk.ac.ebi.subs.data.component.Archive;
   * Validation entity outcome document to store an entity validation result for a specific rule set
   */
 @ToString(callSuper = true)
-public class EntityValidationOutcome extends AbstractValidationOutcome implements Identifiable {
+public class SingleValidationResult extends AbstractValidationResult implements Identifiable {
 
     private int version;
     private String uuid;
-    private String outcomeDocumentUUID;
+    private String validationResultUUID;
 
     private Archive archive;
 
-    public EntityValidationOutcome() {
+    public SingleValidationResult() {
     }
 
-    public EntityValidationOutcome(Archive archive, String entityUuid) {
+    public SingleValidationResult(Archive archive, String entityUuid) {
         this.archive = archive;
         this.setEntityUuid(entityUuid);
-        this.setValidationOutcome(ValidationOutcomeEnum.Pending);
+        this.setValidationStatus(ValidationStatus.Pending);
     }
 
     @Override
@@ -53,11 +53,11 @@ public class EntityValidationOutcome extends AbstractValidationOutcome implement
     }
 
 
-    public String getOutcomeDocumentUUID() {
-        return outcomeDocumentUUID;
+    public String getValidationResultUUID() {
+        return validationResultUUID;
     }
 
-    public void setOutcomeDocumentUUID(String outcomeDocumentUUID) {
-        this.outcomeDocumentUUID = outcomeDocumentUUID;
+    public void setValidationResultUUID(String validationResultUUID) {
+        this.validationResultUUID = validationResultUUID;
     }
 }

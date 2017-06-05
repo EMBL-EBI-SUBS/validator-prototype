@@ -19,7 +19,7 @@ import java.util.Map;
 @ToString(callSuper = true)
 @Document
 @CompoundIndex(name = "submission_entity_id", def = "{'submissionId': 1, 'entityUuid': 1}")
-public class ValidationOutcome extends AbstractValidationOutcome implements Identifiable {
+public class ValidationResult extends AbstractValidationResult implements Identifiable {
 
     @Id
     private String uuid;
@@ -31,8 +31,8 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
     @Transient
     private List<Archive> expectedArchives;
 
-    private List<EntityValidationOutcome> validationResults = new ArrayList<>();
-    private Map<Archive, Boolean> expectedOutcomes = new HashMap<>();
+    private List<SingleValidationResult> validationResults = new ArrayList<>();
+    private Map<Archive, Boolean> expectedResults = new HashMap<>();
 
     @Override
     public String getUuid() {
@@ -70,19 +70,19 @@ public class ValidationOutcome extends AbstractValidationOutcome implements Iden
         this.expectedArchives = expectedArchives;
     }
 
-    public List<EntityValidationOutcome> getValidationResults() {
+    public List<SingleValidationResult> getValidationResults() {
         return validationResults;
     }
 
-    public void setValidationResults(List<EntityValidationOutcome> validationResults) {
+    public void setValidationResults(List<SingleValidationResult> validationResults) {
         this.validationResults = validationResults;
     }
 
-    public Map<Archive, Boolean> getExpectedOutcomes() {
-        return expectedOutcomes;
+    public Map<Archive, Boolean> getExpectedResults() {
+        return expectedResults;
     }
 
-    public void setExpectedOutcomes(Map<Archive, Boolean> expectedOutcomes) {
-        this.expectedOutcomes = expectedOutcomes;
+    public void setExpectedResults(Map<Archive, Boolean> expectedResults) {
+        this.expectedResults = expectedResults;
     }
 }
