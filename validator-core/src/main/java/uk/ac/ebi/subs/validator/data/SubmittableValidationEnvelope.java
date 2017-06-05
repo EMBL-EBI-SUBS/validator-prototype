@@ -22,15 +22,7 @@ public class SubmittableValidationEnvelope<BaseSubmittable> {
         return submissionId;
     }
 
-    public void setSubmissionId(String submissionId) {
-        this.submissionId = submissionId;
-    }
-
     public BaseSubmittable getEntityToValidate() {
         return entityToValidate;
-    }
-
-    public void setEntityToValidate(BaseSubmittable entityToValidate) {
-        this.entityToValidate = entityToValidate;
     }
 }
