@@ -22,7 +22,7 @@ public class ValidatorQueueConfig {
      */
     @Bean
     Queue validatorQueue() {
-        return new Queue(Queues.SUBMISSION_VALIDATOR, true);
+        return new Queue(Queues.SUBMISSION_SAMPLE_VALIDATOR, true);
     }
 
     /**

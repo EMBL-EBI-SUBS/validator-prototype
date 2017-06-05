@@ -15,5 +15,5 @@ public class Queues {
 
     public static final String OUTCOME_DOCUMENT_UPDATE = "outcome-document-update";
 
-    public static final String SUBMISSION_VALIDATOR = "usi-submission-validator";
+    public static final String SUBMISSION_SAMPLE_VALIDATOR = "usi-submission-sample-validator";
 }
