@@ -4,7 +4,7 @@ import lombok.ToString;
 import uk.ac.ebi.subs.data.component.Archive;
 
 /**
-  * Validation entity outcome document to store an entity validation result for a specific rule set
+  * Validation entity result document to store an entity validation result for a specific rule set
   */
 @ToString(callSuper = true)
 public class SingleValidationResult extends AbstractValidationResult implements Identifiable {

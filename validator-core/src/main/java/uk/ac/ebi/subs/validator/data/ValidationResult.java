@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
-  * Validation outcome document to store all the validation results
+  * Validation result document to store all the validation results
   */
 @ToString(callSuper = true)
 @Document

@@ -1,7 +1,7 @@
 package uk.ac.ebi.subs.validator.data;
 
 /**
- * Controlled vocabulary for validation outcomes
+ * Controlled vocabulary for validation status
  *
  * <li>{@link #Pending}</li>
  * <li>{@link #Pass}</li>
