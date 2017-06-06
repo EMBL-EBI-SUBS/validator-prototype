@@ -3,14 +3,14 @@ package uk.ac.ebi.subs.validator.data;
 import lombok.ToString;
 
 /**
-  * Basic validation outcome properties that any such object should have
+  * Basic validation result properties that any such object should have
   */
 @ToString
-public abstract class AbstractValidationOutcome {
+public abstract class AbstractValidationResult {
 
     private String message;
 
-    private ValidationOutcomeEnum validationOutcome = ValidationOutcomeEnum.Pending;
+    private ValidationStatus validationStatus = ValidationStatus.Pending;
 
     private String entityUuid;
 
@@ -22,12 +22,12 @@ public abstract class AbstractValidationOutcome {
         this.message = message;
     }
 
-    public ValidationOutcomeEnum getValidationOutcome() {
-        return validationOutcome;
+    public ValidationStatus getValidationStatus() {
+        return validationStatus;
     }
 
-    public void setValidationOutcome(ValidationOutcomeEnum validationOutcome) {
-        this.validationOutcome = validationOutcome;
+    public void setValidationStatus(ValidationStatus validationStatus) {
+        this.validationStatus = validationStatus;
     }
 
     public String getEntityUuid() {

@@ -212,27 +212,27 @@ public class ValidatorQueueConfig {
     }
 
     /**
-     * Instantiate a {@code Queue} for publish events related to the outcome document.
+     * Instantiate a {@code Queue} for publish events related to the validation result document.
      *
-     * @return an instance of a {@code Queue} for publish events related to the outcome document.
+     * @return an instance of a {@code Queue} for publish events related to the validation result document.
      */
     @Bean
-    Queue outcomeDocumentQueue() {
-        return new Queue(Queues.OUTCOME_DOCUMENT_UPDATE, true);
+    Queue validationResultDocumentQueue() {
+        return new Queue(Queues.VALIDATION_RESULT_DOCUMENT_UPDATE, true);
     }
 
     /**
-     * Create a {@code Binding} between the validation exchange and the outcome document queue
-     * using the routing key of outcome document updated.
+     * Create a {@code Binding} between the validation exchange and the validation result document queue
+     * using the routing key of validation result document updated.
      *
-     * @param outcomeDocumentQueue {@code Queue} for outcome document events
+     * @param validationResultDocumentQueue {@code Queue} for validation result document events
      * @param validationExchange {@code TopicExchange} for validation
-     * @return a {@code Binding} between the validation exchange and the outcome document queue
-     * using the routing key of outcome document updated.
+     * @return a {@code Binding} between the validation exchange and the validation result document queue
+     * using the routing key of validation result document updated.
      */
     @Bean
-    Binding outcomeDocumentUpdatedBinding(Queue outcomeDocumentQueue, TopicExchange validationExchange) {
-        return BindingBuilder.bind(outcomeDocumentQueue).to(validationExchange)
-                .with(RoutingKeys.EVENT_OUTCOME_DOCUMENT_UPDATED);
+    Binding validationResultDocumentUpdatedBinding(Queue validationResultDocumentQueue, TopicExchange validationExchange) {
+        return BindingBuilder.bind(validationResultDocumentQueue).to(validationExchange)
+                .with(RoutingKeys.EVENT_VALIDATION_RESULT_DOCUMENT_UPDATED);
     }
 }

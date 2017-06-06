@@ -13,7 +13,7 @@ public class Queues {
 
     public static final String VALIDATION_RESULT = "validation-result";
 
-    public static final String OUTCOME_DOCUMENT_UPDATE = "outcome-document-update";
+    public static final String VALIDATION_RESULT_DOCUMENT_UPDATE = "validation-result-document-update";
 
     public static final String SUBMISSION_SAMPLE_VALIDATOR = "usi-submission-sample-validator";
 }
