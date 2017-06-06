@@ -53,7 +53,7 @@ gradle bootRun
 cd validator-status-flipper
 gradle bootRun
 ```
-You can now start using this prototype by publishing a [SubmissionEnvelope](https://github.com/EMBL-EBI-SUBS/subs/blob/master/subs-processing-model/src/main/java/uk/ac/ebi/subs/processing/SubmissionEnvelope.java) in the `SUBMISSION_VALIDATOR` queue. You should then be able to see the dummy validation results on your local MongoDB.
+You can now start using this prototype by publishing a [SubmittableValidationEnvelope](https://github.com/EMBL-EBI-SUBS/validator-prototype/blob/master/validator-core/src/main/java/uk/ac/ebi/subs/validator/data/SubmittableValidationEnvelope.java) to the `SUBMISSION_VALIDATOR` queue. You should then be able to see the dummy validation results on your local MongoDB.
 
 ## License
 
